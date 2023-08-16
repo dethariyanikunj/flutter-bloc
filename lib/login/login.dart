@@ -74,7 +74,6 @@ class Login extends StatelessWidget {
                   return '';
                 },
                 builder: (context, value) {
-                  debugPrint('Selector');
                   if (value.trim().isEmpty) return const SizedBox();
                   return Text(
                     value,
@@ -87,7 +86,6 @@ class Login extends StatelessWidget {
               // Through bloc selector
               BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
-                  debugPrint('Bloc Builder');
                   if (state is LoginInvalidPasswordState) {
                     return Text(
                       state.errorMessage,
