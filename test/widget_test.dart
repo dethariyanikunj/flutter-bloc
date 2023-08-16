@@ -11,20 +11,29 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:block_example/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Login screen smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that login screen have below widgets or not.
+    expect(find.text('enter email'), findsOneWidget);
+    expect(find.text('enter password'), findsOneWidget);
+    expect(find.text('Login'), findsOneWidget);
+    expect(find.text('Please enter valid email address'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // check whether any widget is matching
+    final emailField = find.ancestor(
+      of: find.text('enter email'),
+      matching: find.byType(TextField),
+    );
+    // enter text in text field
+    await tester.enterText(emailField, 'text');
+    // wait for 1 second
+    await tester.pump(const Duration(microseconds: 1000));
+    expect(find.text('Please enter valid email address'), findsOneWidget);
+
+    // button tap event
+    await tester.tap(find.byType(ElevatedButton));
     await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
   });
 }
