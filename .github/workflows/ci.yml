@@ -37,3 +37,8 @@ jobs:
       - run: flutter clean
       - run: flutter pub get
       - run: flutter build apk
+      - name: Upload apk as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: flutter-apk
+          path: build/app/outputs/flutter-apk
