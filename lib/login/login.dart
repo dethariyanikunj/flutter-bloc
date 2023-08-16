@@ -35,6 +35,7 @@ class Login extends StatelessWidget {
                   );
                 },
               ),
+              // Through bloc builder
               BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
                   if (state is LoginInvalidEmailState) {
@@ -64,8 +65,29 @@ class Login extends StatelessWidget {
                   );
                 },
               ),
+              // Through bloc selector
+              BlocSelector<LoginBloc, LoginState, String>(
+                selector: (state) {
+                  if (state is LoginInvalidPasswordState) {
+                    return state.errorMessage;
+                  }
+                  return '';
+                },
+                builder: (context, value) {
+                  debugPrint('Selector');
+                  if (value.trim().isEmpty) return const SizedBox();
+                  return Text(
+                    value,
+                    style: const TextStyle(
+                      color: Colors.red,
+                    ),
+                  );
+                },
+              ),
+              // Through bloc selector
               BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
+                  debugPrint('Bloc Builder');
                   if (state is LoginInvalidPasswordState) {
                     return Text(
                       state.errorMessage,

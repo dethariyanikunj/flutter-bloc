@@ -23,7 +23,9 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
       },
     );
     on<ProductsListLoadMoreDataEvent>(
-      (event, emit) {},
+      (event, emit) {
+        // Todo
+      },
     );
     _fetchProducts();
   }
