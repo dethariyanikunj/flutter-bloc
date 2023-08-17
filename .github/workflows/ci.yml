@@ -58,7 +58,10 @@ jobs:
       - run: flutter pub get
       - run: flutter build ios --no-codesign
       - run: mkdir -p $HOME/artifacts
-      - run: mv build/ios/iphones/*.ipa $HOME/artifacts/app.ipa
+      - run: |
+          if [ -f build/ios/iphones/Runner.app/Runner.ipa ]; then 
+            mv build/ios/iphones/Runner.app/Runner.ipa $HOME/artifacts/app.ipa
+          fi
       - name: Upload ipa as Artifact
         uses: actions/upload-artifact@v2
         with:
