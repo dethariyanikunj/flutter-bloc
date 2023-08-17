@@ -22,7 +22,7 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
-  flutter_apk:
+  build_apk:
     name: Build Flutter (Android)
     needs: [flutter_test]
     runs-on: ubuntu-latest
@@ -42,3 +42,26 @@ jobs:
         with:
           name: flutter-apk
           path: build/app/outputs/flutter-apk
+  build_ios:
+    name: Build Flutter (iOS)
+    needs: [flutter_test]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: flutter clean
+      - run: flutter pub get
+      - run: flutter build ios --no-codesign
+      - run: mkdir -p $HOME/artifacts
+      - run: mv build/ios/iphones/*.ipa $HOME/artifacts/app.ipa
+      - name: Upload ipa as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: flutter-ipa
+          path: $HOME/artifacts/app.ipa
+
