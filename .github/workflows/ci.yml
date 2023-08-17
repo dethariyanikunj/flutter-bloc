@@ -44,7 +44,7 @@ jobs:
 #          path: build/app/outputs/flutter-apk
   build_ios:
     name: Build Flutter (iOS)
-    needs: [flutter_test]
+#    needs: [flutter_test]
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
