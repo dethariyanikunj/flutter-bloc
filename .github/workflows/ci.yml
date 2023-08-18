@@ -42,11 +42,11 @@ jobs:
         if: steps.check_emulator.outputs.RUNNING == ''
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30
+          api-level: 29
           script: ./gradlew connectedCheck
       - name: Start emulator
         if: steps.check_emulator.outputs.RUNNING == ''
-        run: emulator -avd emulator-30 -no-window -no-audio -no-boot-anim &
+        run: emulator -avd emulator-29 -no-window -no-audio -no-boot-anim &
       - name: Wait for emulator to start
         run: android-wait-for-emulator
       - name: Run integration tests
