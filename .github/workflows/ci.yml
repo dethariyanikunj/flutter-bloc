@@ -35,11 +35,9 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter build apk
       - name: Check if emulator is running
         id: check_emulator
         run: echo ::set-output name=RUNNING::$(adb devices | grep emulator)
-      - run: chmod +x ./gradlew
       - name: Set up emulator
         if: steps.check_emulator.outputs.RUNNING == ''
         uses: reactivecircus/android-emulator-runner@v2
