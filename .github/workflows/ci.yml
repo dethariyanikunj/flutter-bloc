@@ -35,20 +35,20 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - name: Check if emulator is running
-        id: check_emulator
-        run: echo ::set-output name=RUNNING::$(adb devices | grep emulator)
+#      - name: Check if emulator is running
+#        id: check_emulator
+#        run: echo ::set-output name=RUNNING::$(adb devices | grep emulator)
       - name: Set up emulator
-        if: steps.check_emulator.outputs.RUNNING == ''
+#        if: steps.check_emulator.outputs.RUNNING == ''
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: ./gradlew connectedCheck
-      - name: Start emulator
-        if: steps.check_emulator.outputs.RUNNING == ''
-        run: emulator -avd emulator-29 -no-window -no-audio -no-boot-anim &
-      - name: Wait for emulator to start
-        run: android-wait-for-emulator
+#      - name: Start emulator
+#        if: steps.check_emulator.outputs.RUNNING == ''
+#        run: emulator -avd emulator-29 -no-window -no-audio -no-boot-anim &
+#      - name: Wait for emulator to start
+#        run: android-wait-for-emulator
       - name: Run integration tests
         run: flutter test integration_test
       - name: Stop emulator
