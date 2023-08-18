@@ -31,7 +31,10 @@ class Login extends StatelessWidget {
                     context,
                     listen: false,
                   ).add(
-                    LoginEmailTextChangedEvent(email),
+                    LoginEmailTextChangedEvent(
+                      email,
+                      passwordTextEditingController.text.toString(),
+                    ),
                   );
                 },
               ),
@@ -61,7 +64,10 @@ class Login extends StatelessWidget {
                     context,
                     listen: false,
                   ).add(
-                    LoginPasswordTextChangedEvent(password),
+                    LoginPasswordTextChangedEvent(
+                      emailTextEditingController.text.toString(),
+                      password,
+                    ),
                   );
                 },
               ),
@@ -119,7 +125,7 @@ class Login extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: state is LoginValidInfoState
+                        backgroundColor: state is LoginValidFieldsState
                             ? Colors.blue
                             : Colors.grey,
                       ),

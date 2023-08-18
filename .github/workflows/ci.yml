@@ -22,6 +22,36 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
+  flutter_integration_test:
+    name: Run flutter integration test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter build apk
+      - name: Check if emulator is running
+        id: check_emulator
+        run: echo ::set-output name=RUNNING::$(adb devices | grep emulator)
+      - name: Set up emulator
+        if: steps.check_emulator.outputs.RUNNING = ''
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+      - name: Start emulator
+        if: steps.check_emulator.outputs.RUNNING = ''
+        run: emulator -avd emulator-30 -no-window -no-audio -no-boot-anim &
+      - name: Wait for emulator to start
+        run: android-wait-for-emulator
+      - name: Run integration tests
+        run: flutter test integration_test
+      - name: Stop emulator
+        run: adb emu kill
   build_apk:
     name: Build Flutter (Android)
     needs: [flutter_test]

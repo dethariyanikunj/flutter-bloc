@@ -4,7 +4,11 @@ abstract class LoginState {}
 
 class LoginInitialState extends LoginState {}
 
-class LoginValidInfoState extends LoginState {}
+class LoginValidEmailState extends LoginState {}
+
+class LoginValidPasswordState extends LoginState {}
+
+class LoginValidFieldsState extends LoginState {}
 
 class LoginInvalidEmailState extends LoginState {
   final String errorMessage;

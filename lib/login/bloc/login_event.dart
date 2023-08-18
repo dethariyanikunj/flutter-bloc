@@ -4,14 +4,16 @@ abstract class LoginEvent {}
 
 class LoginEmailTextChangedEvent extends LoginEvent {
   final String email;
+  final String password;
 
-  LoginEmailTextChangedEvent(this.email);
+  LoginEmailTextChangedEvent(this.email, this.password);
 }
 
 class LoginPasswordTextChangedEvent extends LoginEvent {
-  final String pass;
+  final String email;
+  final String password;
 
-  LoginPasswordTextChangedEvent(this.pass);
+  LoginPasswordTextChangedEvent(this.email, this.password);
 }
 
 class LoginButtonPressEvent extends LoginEvent {
