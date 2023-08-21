@@ -38,7 +38,6 @@ jobs:
       - name: Set up emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: [playstore]
           api-level: 29
           arch: x86_64
       - name: Run integration tests
