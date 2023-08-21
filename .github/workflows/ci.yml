@@ -39,8 +39,13 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
+          profile: Nexus 5
+          target: playstore
           arch: x86_64
-          script: flutter test integration_test --verbose
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: cd handle-it-app && flutter test integration_test --flavor devtest --verbose
 #  build_apk:
 #    name: Build Flutter (Android)
 #    needs: [ flutter_integration_test ]
