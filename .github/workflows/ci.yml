@@ -40,10 +40,7 @@ jobs:
         with:
           api-level: 29
           arch: x86_64
-      - name: Run integration tests
-        run: flutter test integration_test
-      - name: Stop emulator
-        run: adb emu kill
+          script: flutter test integration_test --verbose
 #  build_apk:
 #    name: Build Flutter (Android)
 #    needs: [ flutter_integration_test ]
