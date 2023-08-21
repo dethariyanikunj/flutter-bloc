@@ -29,7 +29,7 @@ jobs:
     strategy:
       matrix:
         device:
-          - "iPhone 11 Pro Max (13.1)"
+          - "iPhone 13 Pro Max Simulator (16.2)"
       fail-fast: true
     steps:
       - name: "List all simulators"
